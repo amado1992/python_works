@@ -46,8 +46,20 @@ table_name = "products"
 
 # Insertar los datos en la base de datos
 
+position = 0
 for index, row in df.iterrows():
-    code = create_unique_code('P', index)
+    # insert in table at zero
+    # code = create_unique_code('P', index, 6)
+
+    # more products
+    lastValue: int = 12473
+    if index == 0:
+        position = 1 + lastValue
+    else:
+        position = position + 1
+
+    code = create_unique_code('P', position, 6)
+
     dchain_spec_status = 0
     material_group = ""
     sub_franchise = ""
@@ -100,8 +112,8 @@ for index, row in df.iterrows():
     query = f"INSERT INTO {table_name} (number, purchase_price, sale_price, taxes, amount, minimum_amount, category, catalogue_id, unit_measurement_id, dchain_spec_status, material_group, sub_franchise, old_material_number, material, material_description, description, ean_upc, adn, mty, cd_mx, url_image, created_at, updated_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
     values = (code, 0.00, 0.00, "", 0.00, 0.00, "", None, None, dchain_spec_status, material_group,
               sub_franchise, old_material_number, material, material_description,
-              description, ean_upc, adn, mty, cd_mx, "", '2025-03-04 13:27:29',
-              '2025-03-04 13:27:29')
+              description, ean_upc, adn, mty, cd_mx, "", '2025-06-23 13:27:29',
+              '2025-06-23 13:27:29')
     cursor.execute(query, values)
 
 # Confirmar la transacción
