@@ -40,6 +40,20 @@ class SimpleSearchEngine:
         # --- 2. Extraer texto limpio (Parsing) ---
         soup = BeautifulSoup(html_content, 'html.parser')
 
+        # === AJUSTA ESTOS SELECTORES SEGÚN LA PÁGINA ===
+        # Método 1: buscar por clase
+        precio_elemento = soup.find('span', class_='price')
+
+        # Método 2: buscar por selector CSS (más preciso)
+        precio_elemento = soup.select_one('.product-price .current-price')
+
+        # Extraer el texto del precio
+        if precio_elemento:
+            precio = precio_elemento.get_text().strip()
+            print(f"💰 Precio encontrado: {precio}")
+        else:
+            print("❌ No se encontró el precio")
+
         # Extraer título
         title = soup.title.string if soup.title else "Sin título"
 
@@ -179,6 +193,8 @@ def main():
     # aquí indexamos unas URLs de muestra
 
     sample_urls = [
+        "https://www.revolico.com/",
+        "https://elyerromenu.com/",
         "https://es.wikipedia.org/wiki/Inteligencia_artificial",
         "https://es.wikipedia.org/wiki/Aprendizaje_autom%C3%A1tico",
         "https://es.wikipedia.org/wiki/Red_neuronal_artificial",
