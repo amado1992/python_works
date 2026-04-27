@@ -1,5 +1,5 @@
 import pandas as pd
-import mysql.connector
+import mysql.connector # If using mysql-connector-python
 import numpy as np
 
 # Ruta del archivo Excel

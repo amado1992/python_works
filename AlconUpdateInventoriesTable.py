@@ -1,4 +1,4 @@
-import mysql.connector
+import mysql.connector # If using mysql-connector-python
 
 # Configurar la conexión a la base de datos MySQL
 connection = mysql.connector.connect(
